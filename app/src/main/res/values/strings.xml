@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Moon Buggy</string>
+    <string name="pauseGameTitle">Game paused</string>
+    <string name="pauseGameMessage">What do you want to do?</string>
+    <string name="pauseGameExitMenu">Exit to menu</string>
+    <string name="pauseGameResume">Resume game</string>
+    <string name="startGame">Start game</string>
+    <string name="exitGame">Exit game</string>
+    <string name="gameOverMessage">Congratulations, you have earned %1$d points!</string>
+    <string name="gameOverNameHint">Your name</string>
+    <string name="gameOverTitle">Game over</string>
+    <string name="showHighscores">Highscores</string>
+    <string name="localHighscorePageTitle">Local Highscores</string>
+    <string name="globalHighscorePageTitle">Global Highscores</string>
+    <string name="showSettings">Settings</string>
+    <string name="prefMusicSettingsTitle">Music settings</string>
+    <string name="prefGameSettingsTitle">Game settings</string>
+    <string name="prefNameTitle">Name</string>
+    <string name="prefNameSummary">The name to use in the highscores</string>
+    <string name="prefVolumeTitle">Music volume</string>
+    <string name="prefVolumeSummary">Set the music volume</string>
+    <string name="noInternet">No internet connection available</string>
+</resources>

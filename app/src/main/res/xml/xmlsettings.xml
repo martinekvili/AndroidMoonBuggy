@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sample="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory android:title="@string/prefMusicSettingsTitle">
+
+        <com.pavelsikun.seekbarpreference.SeekBarPreference
+            android:key="music_volume"
+            android:title="@string/prefVolumeTitle"
+            android:summary="@string/prefVolumeSummary"
+            android:enabled="true"
+            android:defaultValue="50"
+            sample:msbp_minValue="0"
+            sample:msbp_maxValue="100"
+            sample:msbp_interval="1"
+            sample:msbp_measurementUnit="%"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/prefGameSettingsTitle">
+
+        <EditTextPreference
+            android:key="last_used_name"
+            android:title="@string/prefNameTitle"
+            android:summary="@string/prefNameSummary"
+            android:enabled="true"/>
+
+    </PreferenceCategory>
+</PreferenceScreen>
