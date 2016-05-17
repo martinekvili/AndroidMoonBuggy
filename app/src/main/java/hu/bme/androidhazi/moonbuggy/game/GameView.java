@@ -30,7 +30,7 @@ public class GameView extends SurfaceView {
     private int width;
     private int height;
 
-    private boolean alertIsOut = false;
+    private AlertDialog pauseDialog = null;
     private boolean isGameOver = false;
 
     public GameView(Context context) {
@@ -108,6 +108,11 @@ public class GameView extends SurfaceView {
                 if (renderLoop != null) {
                     stopRenderLoop();
                 }
+
+                if (pauseDialog != null) {
+                    pauseDialog.dismiss();
+                    pauseDialog = null;
+                }
             }
 
             @Override
@@ -133,7 +138,7 @@ public class GameView extends SurfaceView {
                 }
 
                 if (event.getX() >= 7 * width / 8 && event.getY() <= height / 4) {
-                    if (!alertIsOut) {
+                    if (pauseDialog == null) {
                         pauseGame();
                     }
                 }
@@ -146,8 +151,8 @@ public class GameView extends SurfaceView {
     private void pauseGame() {
         renderLoop.setPaused(true);
 
-        if (!alertIsOut) {
-            AlertDialog dialog = new AlertDialog.Builder(context)
+        if (pauseDialog == null) {
+            pauseDialog = new AlertDialog.Builder(context)
                     .setTitle(R.string.pauseGameTitle)
                     .setMessage(R.string.pauseGameMessage)
                     .setNegativeButton(R.string.pauseGameExitMenu, new DialogInterface.OnClickListener() {
@@ -158,15 +163,14 @@ public class GameView extends SurfaceView {
                     .setPositiveButton(R.string.pauseGameResume, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             renderLoop.setPaused(false);
-                            alertIsOut = false;
+                            pauseDialog = null;
                         }
                     })
                     .setIcon(android.R.drawable.ic_dialog_info)
                     .create();
-            dialog.setCanceledOnTouchOutside(false);
-            dialog.show();
-
-            alertIsOut = true;
+            pauseDialog.setCanceledOnTouchOutside(false);
+            pauseDialog.setCancelable(false);
+            pauseDialog.show();
         }
     }
 
@@ -185,10 +189,18 @@ public class GameView extends SurfaceView {
     }
 
     public String getGameState() {
-        stopRenderLoop();
+        JSONObject jsonObject;
 
-        JSONObject jsonObject = renderLoop.getGameState();
+        if (renderLoop != null) {
+            stopRenderLoop();
+
+            jsonObject = renderLoop.getGameState();
+        } else {
+            jsonObject = new JSONObject();
+        }
+
         try {
+
             jsonObject.put("isGameOver", isGameOver);
         } catch (JSONException e) {
             Log.e("MOON_BUGGY_GAME", e.getMessage());

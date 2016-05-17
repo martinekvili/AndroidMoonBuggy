@@ -91,6 +91,8 @@ public class GameOverDialogFragment extends DialogFragment {
         AlertDialog dialog = builder.create();
         dialog.setCanceledOnTouchOutside(false);
 
+        setCancelable(false);
+
         return dialog;
     }
 
